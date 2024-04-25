@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document Similarity</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #333;
+            color: #ccc;
+            font-family: 'Times New Roman', Times, serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background-color: #444;
+        }
+
+        .card-header {
+            background-color: #666;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-secondary {
+            background-color: #ff8c00;
+            border-color: #ff8c00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="mb-0 text-white">Document Similarity</h4>
+                    </div>
+                    <div class="card-body">
+                        {% if session %}
+                        <p class="text-center">Welcome, {{ session.userinfo.name }}!</p>
+                        <form method="post" enctype="multipart/form-data">
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="file_1" class="text-white">Upload PDF 1:</label>
+                                        <input type="file" class="form-control-file bg-dark text-white" id="file_1" name="file_1" required>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="file_2" class="text-white">Upload PDF 2:</label>
+                                        <input type="file" class="form-control-file bg-dark text-white" id="file_2" name="file_2" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <a href="{{ url_for('logout') }}" class="btn btn-secondary">Log out</a>
+                            </div>
+                        </form>
+                        {% else %}
+                        <p class="text-center">You need to log in to access this page.</p>
+                        <div class="text-center">
+                            <a href="{{ url_for('login') }}" class="btn btn-primary">Log in</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

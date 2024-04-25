@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document Similarity Result</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #333;
+            color: #ccc;
+            font-family: 'Times New Roman', Times, serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background-color: #444;
+        }
+
+        .card-header {
+            background-color: #666;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-secondary {
+            background-color: #ff8c00;
+            border-color: #ff8c00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="mb-0 text-white">Document Similarity Result</h4>
+                    </div>
+                    <div class="card-body">
+                        {% if session %}
+                        <p class="text-center">Welcome, {{ session.userinfo.name }}!</p>
+                        <pre class="text-center text-white">{{ result }}</pre>
+                        <div class="text-center">
+                            <a href="{{ url_for('logout') }}" class="btn btn-secondary">Log out</a>
+                        </div>
+                        {% else %}
+                        <p class="text-center">You need to log in to access this page.</p>
+                        <div class="text-center">
+                            <a href="{{ url_for('login') }}" class="btn btn-primary">Log in</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="mb-0 text-white">Comparison History</h4>
+                    </div>
+                    <div class="card-body">
+                        {% if history %}
+                        <ul class="list-group">
+                            {% for item in history %}
+                            <li class="list-group-item bg-dark text-white">
+                                <strong>{{ item.file_1_name }} vs {{ item.file_2_name }}</strong>
+                                <small class="text-muted">{{ item.result }}</small>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p class="text-center">No comparison history found.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
